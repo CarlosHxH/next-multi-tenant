@@ -12,7 +12,7 @@ export default function Home() {
   const Tenants = () => {
     if (loading) {
       return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="flex items-center justify-center min-h-screen min-w-screen">
           <p className="text-gray-500 animate-pulse">Carregando tenant...</p>
         </div>
       );
@@ -20,7 +20,7 @@ export default function Home() {
 
     if (error) {
       return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="flex items-center justify-center min-h-scren  min-w-screen">
           <h1 className="text-4xl font-bold mb-2">404</h1>
           <p className="text-lg text-gray-600">Ops! Esse tenant não foi encontrado.</p>
         </div>
@@ -28,7 +28,7 @@ export default function Home() {
     }
     if (!data) {
       return (
-        <div className="flex flex-col items-center justify-center bg-gray-50 text-gray-800">
+        <div className="flex flex-col items-center justify-center">
           <h1 className="text-4xl font-bold mb-2">Vazio</h1>
         </div>
       );
