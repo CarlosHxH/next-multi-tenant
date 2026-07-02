@@ -8,7 +8,6 @@ import { TenantData } from "@/types/tenant";
 import { ShoppingCart, X, Plus, Minus, Trash2, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 import { useState } from "react";
-import { useSwipeable } from "@use-gesture/react";
 
 interface CartDrawerProps {
   isOpen: boolean;
