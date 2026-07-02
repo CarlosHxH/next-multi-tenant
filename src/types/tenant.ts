@@ -20,6 +20,7 @@ export interface TenantData {
   active: boolean;
   rattings: string;
   image_url: string;
+  whatsapp_phone?: string;
   delivery_rules: {
     fixed_fee: number;
     estimated_time_minutes: string;

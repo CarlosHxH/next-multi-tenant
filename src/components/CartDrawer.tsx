@@ -3,16 +3,33 @@
 import { useCart, CartItem } from "@/hooks/useCart";
 import Image from "next/image";
 import Link from "next/link";
+import { openWhatsAppCheckout } from "@/lib/whatsapp";
+import { TenantData } from "@/types/tenant";
 
 interface CartDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   tenant: string;
+  tenantData?: TenantData;
 }
 
-export default function CartDrawer({ isOpen, onClose, tenant }: CartDrawerProps) {
+export default function CartDrawer({ isOpen, onClose, tenant, tenantData }: CartDrawerProps) {
   const { items, removeItem, updateQuantity, getTotalPrice, clearCart } = useCart();
   const totalPrice = getTotalPrice();
+
+  const handleCheckout = () => {
+    if (!tenantData?.whatsapp_phone) {
+      alert("Número de WhatsApp do restaurante não configurado.");
+      return;
+    }
+
+    openWhatsAppCheckout({
+      tenantName: tenantData.name,
+      tenantPhone: tenantData.whatsapp_phone,
+      items,
+      totalPrice,
+    });
+  };
 
   return (
     <>
@@ -140,13 +157,10 @@ export default function CartDrawer({ isOpen, onClose, tenant }: CartDrawerProps)
                 Continuar Comprando
               </button>
               <button
-                onClick={() => {
-                  // TODO: Implementar checkout
-                  alert("Checkout em desenvolvimento!");
-                }}
-                className="w-full h-11 bg-gray-900 text-white font-bold rounded-lg hover:bg-black transition-colors"
+                onClick={handleCheckout}
+                className="w-full h-11 bg-gray-900 text-white font-bold rounded-lg hover:bg-black transition-colors flex items-center justify-center gap-2"
               >
-                Finalizar Pedido
+                <span>💬</span> Finalizar no WhatsApp
               </button>
               <button
                 onClick={clearCart}

@@ -6,6 +6,7 @@ export const tenantsData = [
         active: true,
         rattings: 4.8,
         image_url: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&auto=format&fit=crop&q=60",
+        whatsapp_phone: "11987654321",
         delivery_rules: { fixed_fee: 7.00, estimated_time_minutes: "30-45" },
         categories: [
             {
@@ -91,6 +92,7 @@ export const tenantsData = [
         active: true,
         rattings: 4.5,
         image_url: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&auto=format&fit=crop&q=60",
+        whatsapp_phone: "21987654321",
         delivery_rules: { fixed_fee: 5.00, estimated_time_minutes: "45-60" },
         categories: [
             {
@@ -146,6 +148,7 @@ export const tenantsData = [
         active: true,
         rattings: 4.4,
         image_url: "https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=600&auto=format&fit=crop&q=60",
+        whatsapp_phone: "31987654321",
         delivery_rules: { fixed_fee: 9.00, estimated_time_minutes: "40-55" },
         categories: [
             {
@@ -201,6 +204,7 @@ export const tenantsData = [
         active: true,
         rattings: 4.7,
         image_url: "https://images.unsplash.com/photo-1511018556340-d16986a1c194?w=600&auto=format&fit=crop&q=60",
+        whatsapp_phone: "41987654321",
         delivery_rules: { fixed_fee: 4.50, estimated_time_minutes: "15-30" },
         categories: [
             {
@@ -248,6 +252,7 @@ export const tenantsData = [
         active: true,
         rattings: 4.9,
         image_url: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600&auto=format&fit=crop&q=60",
+        whatsapp_phone: "85987654321",
         delivery_rules: { fixed_fee: 6.50, estimated_time_minutes: "35-50" },
         categories: [
             {
@@ -295,6 +300,7 @@ export const tenantsData = [
         active: true,
         rattings: 4.3,
         image_url: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&auto=format&fit=crop&q=60",
+        whatsapp_phone: "47987654321",
         delivery_rules: { fixed_fee: 4.00, estimated_time_minutes: "20-35" },
         categories: [
             {

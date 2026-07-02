@@ -217,7 +217,7 @@ export default function ProductDetailsPage({ tenant, id }: ProductDetailsPagePro
         </div>
       </footer>
 
-      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} tenant={tenant} />
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} tenant={tenant} tenantData={tenantData} />
     </main>
   );
 }
