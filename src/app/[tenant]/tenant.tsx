@@ -65,9 +65,9 @@ export default function TenantHomePage({ tenant }: TenantProps) {
         {/* Botão de Voltar Flutuante */}
         <Link 
           href="/" 
-          className="absolute top-4 left-4 z-10 bg-white/20 backdrop-blur hover:bg-white text-gray-800 p-2.5 rounded-full shadow-lg transition-transform hover:-translate-x-0.5"
+          className="absolute top-4 left-4 z-10 backdrop-blur hover:bg-white text-white p-2.5 rounded-full shadow-lg transition-transform hover:-translate-x-0.5"
         >
-          <span className="text-sm font-bold">← Voltar</span>
+          <span className="text-md font-bold">←</span>
         </Link>
       </div>
 
