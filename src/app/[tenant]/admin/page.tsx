@@ -126,12 +126,12 @@ export default function TenantAdminPage() {
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
-      <div className="relative flex min-h-screen overflow-hidden">
-        <aside className="hidden w-80 shrink-0 border-r border-white/10 bg-slate-950/95 lg:flex lg:flex-col lg:min-h-screen">
+      <div className="relative">
+        <aside className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-10 lg:w-80 lg:border-r lg:border-white/10 lg:bg-slate-950/95 lg:flex lg:flex-col lg:h-screen lg:overflow-y-auto">
           {sidebarContent}
         </aside>
 
-        <div className="flex-1">
+        <div className="lg:ml-80">
           <div className="sticky top-0 z-20 flex items-center justify-between border-b border-white/10 bg-slate-950/95 px-4 py-4 lg:hidden">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-amber-400/80">Admin</p>
@@ -202,9 +202,12 @@ export default function TenantAdminPage() {
 
                     <div className="mt-6 grid gap-4 sm:grid-cols-2">
                       {category.products.map((product) => (
-                        <div key={product.product_id} className="rounded-3xl border border-white/10 bg-black/30 p-4">
-                          <div className="flex items-start gap-3">
-                            <div className="relative h-16 w-16 overflow-hidden rounded-2xl bg-gray-800">
+                        <div
+                          key={product.product_id}
+                          className="rounded-3xl border border-white/10 bg-slate-900/85 p-4 transition-all duration-200 hover:border-amber-400/50 hover:bg-slate-900/95"
+                        >
+                          <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+                            <div className="relative h-28 w-full overflow-hidden rounded-3xl bg-gray-800 sm:h-24 sm:w-24">
                               <Image
                                 src={product.image_url}
                                 alt={product.name}
@@ -212,15 +215,25 @@ export default function TenantAdminPage() {
                                 className="object-cover"
                               />
                             </div>
-                            <div className="min-w-0">
+                            <div className="min-w-0 flex-1">
                               <h4 className="font-semibold text-white">{product.name}</h4>
-                              <p className="mt-1 text-sm text-gray-400 line-clamp-2">{product.description}</p>
+                              <p className="mt-3 text-sm leading-6 text-gray-400 line-clamp-3">
+                                {product.description}
+                              </p>
                             </div>
                           </div>
 
-                          <div className="mt-4 flex items-center justify-between text-sm text-gray-300">
-                            <span>R$ {product.price.toFixed(2)}</span>
-                            <span>{product.available ? "Disponível" : "Indisponível"}</span>
+                          <div className="mt-4 flex flex-col gap-2 border-t border-white/10 pt-4 text-sm text-gray-300 sm:flex-row sm:items-center sm:justify-between">
+                            <span className="font-semibold text-white">R$ {product.price.toFixed(2)}</span>
+                            <span
+                              className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
+                                product.available
+                                  ? "bg-emerald-500/15 text-emerald-300"
+                                  : "bg-rose-500/15 text-rose-300"
+                              }`}
+                            >
+                              {product.available ? "Disponível" : "Indisponível"}
+                            </span>
                           </div>
                         </div>
                       ))}
