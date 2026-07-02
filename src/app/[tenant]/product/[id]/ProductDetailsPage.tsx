@@ -5,7 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useFetch } from "@/hooks/useFetch";
-import { useCart } from "@/hooks/useCart";
+import { useCart } from "react-use-cart";
 import CartDrawer from "@/components/CartDrawer";
 import { ProductDetailsResponse, Product } from "@/types/tenant";
 import { ShoppingCart, ArrowLeft, AlertCircle } from "lucide-react";
@@ -18,11 +18,11 @@ interface ProductDetailsPageProps {
 export default function ProductDetailsPage({ tenant, id }: ProductDetailsPageProps) {
   // Buscamos os dados do tenant para garantir o contexto e regras do restaurante
   const { data, loading, error } = useFetch<ProductDetailsResponse>(`/api/v1/tenants/${tenant}/products/${id}`);
-  const { addItem, getTotalItems } = useCart();
+  const { addItem, totalItems } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [notes, setNotes] = useState("");
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const cartItemsCount = getTotalItems();
+  const cartItemsCount = totalItems;
 
   const tenantData = data?.tenant ?? null;
   const apiProduct = data?.product ?? null;
@@ -193,7 +193,7 @@ export default function ProductDetailsPage({ tenant, id }: ProductDetailsPagePro
             disabled={!product.available}
             onClick={() => {
               addItem({
-                product_id: id,
+                id: id,
                 name: product.name,
                 price: product.price,
                 quantity,

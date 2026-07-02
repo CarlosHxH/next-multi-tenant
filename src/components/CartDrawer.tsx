@@ -1,6 +1,6 @@
 "use client";
 
-import { useCart, CartItem } from "@/hooks/useCart";
+import { useCart } from "react-use-cart";
 import Image from "next/image";
 import Link from "next/link";
 import { openWhatsAppCheckout } from "@/lib/whatsapp";
@@ -15,8 +15,7 @@ interface CartDrawerProps {
 }
 
 export default function CartDrawer({ isOpen, onClose, tenant, tenantData }: CartDrawerProps) {
-  const { items, removeItem, updateQuantity, getTotalPrice, clearCart } = useCart();
-  const totalPrice = getTotalPrice();
+  const { items, removeItem, updateItem, emptyCart, cartTotal } = useCart();
 
   const handleCheckout = () => {
     if (!tenantData?.whatsapp_phone) {
@@ -24,11 +23,21 @@ export default function CartDrawer({ isOpen, onClose, tenant, tenantData }: Cart
       return;
     }
 
+    // Converter items do formato react-use-cart para o formato esperado pelo whatsapp.ts
+    const formattedItems = items.map(item => ({
+      product_id: String(item.id),
+      name: item.name as string,
+      price: item.price,
+      quantity: item.quantity ?? 1,
+      image_url: (item.image_url as string) || "",
+      notes: (item.notes as string) || "",
+    }));
+
     openWhatsAppCheckout({
       tenantName: tenantData.name,
       tenantPhone: tenantData.whatsapp_phone,
-      items,
-      totalPrice,
+      items: formattedItems,
+      totalPrice: cartTotal || 0,
     });
   };
 
@@ -95,14 +104,14 @@ export default function CartDrawer({ isOpen, onClose, tenant, tenantData }: Cart
                       </p>
                     )}
                     <p className="text-sm font-bold text-emerald-600 mt-1">
-                      R$ {(item.price * item.quantity).toFixed(2)}
+                      R$ {(item.price * (item.quantity ?? 1)).toFixed(2)}
                     </p>
                   </div>
 
                   {/* Controles */}
                   <div className="flex flex-col items-end justify-between">
                     <button
-                      onClick={() => removeItem(item.product_id)}
+                      onClick={() => removeItem(item.id)}
                       className="text-gray-400 hover:text-red-600 transition-colors"
                     >
                       <Trash2 size={16} />
@@ -110,21 +119,24 @@ export default function CartDrawer({ isOpen, onClose, tenant, tenantData }: Cart
                     <div className="flex items-center border border-gray-200 bg-white rounded-md">
                       <button
                         onClick={() =>
-                          updateQuantity(
-                            item.product_id,
-                            Math.max(1, item.quantity - 1)
-                          )
+                          updateItem(item.id, {
+                            ...item,
+                            quantity: Math.max(1, (item.quantity ?? 1) - 1),
+                          })
                         }
                         className="w-6 h-6 flex items-center justify-center text-gray-600 hover:bg-gray-100 transition-colors"
                       >
                         <Minus size={14} />
                       </button>
                       <span className="w-6 text-center text-xs font-bold text-gray-800">
-                        {item.quantity}
+                        {item.quantity ?? 1}
                       </span>
                       <button
                         onClick={() =>
-                          updateQuantity(item.product_id, item.quantity + 1)
+                          updateItem(item.id, {
+                            ...item,
+                            quantity: (item.quantity ?? 1) + 1,
+                          })
                         }
                         className="w-6 h-6 flex items-center justify-center text-gray-600 hover:bg-gray-100 transition-colors"
                       >
@@ -145,7 +157,7 @@ export default function CartDrawer({ isOpen, onClose, tenant, tenantData }: Cart
             <div className="flex items-center justify-between">
               <span className="text-gray-600 font-medium">Total:</span>
               <span className="text-xl font-bold text-emerald-600">
-                R$ {totalPrice.toFixed(2)}
+                R$ {(cartTotal || 0).toFixed(2)}
               </span>
             </div>
 
@@ -165,7 +177,7 @@ export default function CartDrawer({ isOpen, onClose, tenant, tenantData }: Cart
                 Finalizar no WhatsApp
               </button>
               <button
-                onClick={clearCart}
+                onClick={emptyCart}
                 className="w-full h-10 text-red-600 text-sm font-medium hover:bg-red-50 rounded-lg transition-colors flex items-center justify-center gap-1.5"
               >
                 <Trash2 size={16} />
