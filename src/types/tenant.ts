@@ -18,6 +18,7 @@ export interface TenantData {
   slug: string;
   name: string;
   active: boolean;
+  rattings: string;
   image_url: string;
   delivery_rules: {
     fixed_fee: number;
@@ -32,4 +33,5 @@ export interface TenantSummary {
   slug: string;
   name: string;
   image_url: string;
+  rattings: string;
 }

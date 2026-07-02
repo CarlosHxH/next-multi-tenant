@@ -13,9 +13,10 @@ export async function GET(request: NextRequest) {
   // 4. Map your data securely
   const tenants = tenantsData.map(item => ({
     id: item.tenant_id,
-    slug: `${proto}://${item.slug}.${host.replace('www.','')}`,
+    slug: item.slug,
     name: item.name,
-    image_url: item.image_url
+    image_url: item.image_url,
+    rattings: item.rattings.toString(),
   }));
 
   // 5. Fix the validation check (an array is always truthy, check length instead)

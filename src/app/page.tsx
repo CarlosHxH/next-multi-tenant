@@ -88,7 +88,7 @@ export default function Home() {
                     {restaurant.name}
                   </h2>
                   <div className="flex items-center gap-2 mt-2 text-xs text-gray-400">
-                    <span className="flex items-center text-amber-500 font-medium">★ 4.8</span>
+                    <span className="flex items-center text-amber-500 font-medium">★ {restaurant.rattings}</span>
                     <span>•</span>
                     <span>Delivery</span>
                   </div>
