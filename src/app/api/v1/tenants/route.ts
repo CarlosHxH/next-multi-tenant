@@ -14,7 +14,8 @@ export async function GET(request: NextRequest) {
   const tenants = tenantsData.map(item => ({
     id: item.tenant_id,
     slug: `${proto}://${item.slug}.${host.replace('www.','')}`,
-    name: item.name
+    name: item.name,
+    image_url: item.image_url
   }));
 
   // 5. Fix the validation check (an array is always truthy, check length instead)

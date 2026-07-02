@@ -3,6 +3,7 @@ export interface Product {
   name: string;
   description: string;
   price: number;
+  image_url: string;
   available: boolean;
 }
 
@@ -17,6 +18,7 @@ export interface TenantData {
   slug: string;
   name: string;
   active: boolean;
+  image_url: string;
   delivery_rules: {
     fixed_fee: number;
     estimated_time_minutes: string;
@@ -29,4 +31,5 @@ export interface TenantSummary {
   id: string;
   slug: string;
   name: string;
+  image_url: string;
 }
