@@ -163,23 +163,19 @@ export default function TenantAdminPage() {
             <section id="stats" className="mt-8 grid gap-4 grid-cols-2 sm:grid-cols-4">
               <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
                 <p className="text-sm uppercase tracking-[0.3em] text-gray-400">Total de produtos</p>
-                <p className="mt-4 text-4xl font-bold text-white">{productCount}</p>
+                <p className="mt-4 text-xl sm:text-4xl font-bold text-white">{productCount}</p>
               </div>
               <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
                 <p className="text-sm uppercase tracking-[0.3em] text-gray-400">Disponíveis</p>
-                <p className="mt-4 text-4xl font-bold text-white">{availableCount}</p>
+                <p className="mt-4 text-xl sm:text-4xl font-bold text-white">{availableCount}</p>
               </div>
               <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
                 <p className="text-sm uppercase tracking-[0.3em] text-gray-400">Categorias</p>
-                <p className="mt-4 text-4xl font-bold text-white">{categoryCount}</p>
+                <p className="mt-4 text-xl sm:text-4xl font-bold text-white">{categoryCount}</p>
               </div>
               <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
                 <p className="text-sm uppercase tracking-[0.3em] text-gray-400">Taxa de entrega</p>
-                <p className="mt-4 text-4xl font-bold text-white">R$ {data.delivery_rules.fixed_fee.toFixed(2)}</p>
-              </div>
-              <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-                <p className="text-sm uppercase tracking-[0.3em] text-gray-400">Total de pedidos</p>
-                <p className="mt-4 text-4xl font-bold text-white">R$ {data.delivery_rules.fixed_fee.toFixed(2)}</p>
+                <p className="mt-4 text-xl sm:text-4xl font-bold text-white">R$ {data.delivery_rules.fixed_fee.toFixed(2)}</p>
               </div>
             </section>
 
