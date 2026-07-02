@@ -7,8 +7,15 @@ export function SonnerProvider() {
     <Toaster 
       position="top-center" 
       richColors 
-      closeButton
+      closeButton={false}
       theme="light"
+      toastOptions={{
+        duration: 2500,
+        style: {
+          fontSize: "0.9rem",
+          padding: "12px 16px",
+        },
+      }}
     />
   );
 }

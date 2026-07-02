@@ -201,9 +201,7 @@ export default function ProductDetailsPage({ tenant, id }: ProductDetailsPagePro
                 image_url: product.image_url,
                 notes,
               });
-              toast.success(`${product?.name} adicionado ao carrinho!`, {
-                description: `Quantidade: ${quantity} | Total: R$ ${totalPrice.toFixed(2)}`,
-              });
+              toast.success(`${product?.name} adicionado!`);
               setQuantity(1);
               setNotes("");
             }}

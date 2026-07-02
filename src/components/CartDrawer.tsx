@@ -7,6 +7,8 @@ import { openWhatsAppCheckout } from "@/lib/whatsapp";
 import { TenantData } from "@/types/tenant";
 import { ShoppingCart, X, Plus, Minus, Trash2, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
+import { useState } from "react";
+import { useSwipeable } from "@use-gesture/react";
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -17,10 +19,25 @@ interface CartDrawerProps {
 
 export default function CartDrawer({ isOpen, onClose, tenant, tenantData }: CartDrawerProps) {
   const { items, removeItem, updateItem, emptyCart, cartTotal } = useCart();
+  const [startX, setStartX] = useState(0);
+
+  const handleSwipe = (e: React.TouchEvent) => {
+    const touchEnd = e.changedTouches[0].clientX;
+    const touchStart = startX;
+    
+    // Swipe para direita (> 50px) para fechar
+    if (touchStart - touchEnd > 50) {
+      onClose();
+    }
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setStartX(e.touches[0].clientX);
+  };
 
   const handleCheckout = () => {
     if (!tenantData?.whatsapp_phone) {
-      toast.error("Número de WhatsApp do restaurante não configurado.");
+      toast.error("WhatsApp não configurado");
       return;
     }
 
@@ -41,7 +58,7 @@ export default function CartDrawer({ isOpen, onClose, tenant, tenantData }: Cart
       totalPrice: cartTotal || 0,
     });
 
-    toast.success(`Redirecionando para WhatsApp...`);
+    toast.success("Abrindo WhatsApp");
   };
 
   return (
@@ -56,6 +73,8 @@ export default function CartDrawer({ isOpen, onClose, tenant, tenantData }: Cart
 
       {/* Drawer */}
       <div
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleSwipe}
         className={`fixed right-0 top-0 h-full w-full max-w-sm bg-white shadow-2xl z-50 transform transition-transform duration-300 flex flex-col ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
