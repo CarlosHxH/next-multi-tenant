@@ -189,7 +189,7 @@ export default function TenantAdminPage() {
 
               <div className="mt-8 space-y-6">
                 {data.categories.map((category) => (
-                  <div key={category.category_id} className="rounded-3xl bg-slate-900/80">
+                  <div key={category.category_id}>
                     <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                       <div>
                         <h3 className="text-xl font-semibold text-white">{category.name}</h3>
