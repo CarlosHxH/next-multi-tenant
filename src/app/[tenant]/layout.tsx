@@ -1,6 +1,7 @@
 "use client";
 
 import { CartProvider } from "@/providers/CartProvider";
+import { TenantProvider } from "@/providers/TenantContext";
 import { useParams } from "next/navigation";
 
 interface TenantLayoutProps {
@@ -12,9 +13,11 @@ export default function TenantLayout({ children }: TenantLayoutProps) {
   const tenant = params.tenant as string;
 
   return (
-    <CartProvider tenant={tenant}>
-      {children}
-    </CartProvider>
+    <TenantProvider tenant={tenant}>
+      <CartProvider tenant={tenant}>
+        {children}
+      </CartProvider>
+    </TenantProvider>
   );
 }
 
