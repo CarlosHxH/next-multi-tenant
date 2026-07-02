@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useFetch } from "@/hooks/useFetch";
 import { useCart } from "@/hooks/useCart";
+import CartDrawer from "@/components/CartDrawer";
 import { ProductDetailsResponse, Product } from "@/types/tenant";
 
 interface ProductDetailsPageProps {
@@ -19,6 +20,8 @@ export default function ProductDetailsPage({ tenant, id }: ProductDetailsPagePro
   const { addItem, getTotalItems } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [notes, setNotes] = useState("");
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const cartItemsCount = getTotalItems();
 
   // Estados de carregamento e erro da API
   if (loading) {
@@ -88,6 +91,17 @@ export default function ProductDetailsPage({ tenant, id }: ProductDetailsPagePro
           <span className="text-xs font-semibold uppercase tracking-wider text-gray-400 bg-gray-100 px-2.5 py-1 rounded-md max-w-[180px] truncate">
             {tenantData.name}
           </span>
+          <button
+            onClick={() => setIsCartOpen(true)}
+            className="relative flex items-center justify-center w-10 h-10 text-gray-700 hover:text-amber-600 transition-colors"
+          >
+            <span className="text-xl">🛒</span>
+            {cartItemsCount > 0 && (
+              <span className="absolute top-0 right-0 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
+                {cartItemsCount}
+              </span>
+            )}
+          </button>
         </div>
       </nav>
 
@@ -199,6 +213,8 @@ export default function ProductDetailsPage({ tenant, id }: ProductDetailsPagePro
           </button>
         </div>
       </footer>
+
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} tenant={tenant} />
     </main>
   );
 }
