@@ -9,6 +9,7 @@ import { useCart } from "react-use-cart";
 import CartDrawer from "@/components/CartDrawer";
 import { ProductDetailsResponse, Product } from "@/types/tenant";
 import { ShoppingCart, ArrowLeft, AlertCircle } from "lucide-react";
+import { toast } from "sonner";
 
 interface ProductDetailsPageProps {
   tenant: string;
@@ -200,7 +201,9 @@ export default function ProductDetailsPage({ tenant, id }: ProductDetailsPagePro
                 image_url: product.image_url,
                 notes,
               });
-              alert(`✓ Adicionado ao carrinho!\n- Item: ${product?.name}\n- Qtd: ${quantity}\n- Total: R$ ${totalPrice.toFixed(2)}`);
+              toast.success(`${product?.name} adicionado ao carrinho!`, {
+                description: `Quantidade: ${quantity} | Total: R$ ${totalPrice.toFixed(2)}`,
+              });
               setQuantity(1);
               setNotes("");
             }}

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { openWhatsAppCheckout } from "@/lib/whatsapp";
 import { TenantData } from "@/types/tenant";
 import { ShoppingCart, X, Plus, Minus, Trash2, MessageCircle } from "lucide-react";
+import { toast } from "sonner";
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -19,7 +20,7 @@ export default function CartDrawer({ isOpen, onClose, tenant, tenantData }: Cart
 
   const handleCheckout = () => {
     if (!tenantData?.whatsapp_phone) {
-      alert("Número de WhatsApp do restaurante não configurado.");
+      toast.error("Número de WhatsApp do restaurante não configurado.");
       return;
     }
 
@@ -39,6 +40,8 @@ export default function CartDrawer({ isOpen, onClose, tenant, tenantData }: Cart
       items: formattedItems,
       totalPrice: cartTotal || 0,
     });
+
+    toast.success(`Redirecionando para WhatsApp...`);
   };
 
   return (
