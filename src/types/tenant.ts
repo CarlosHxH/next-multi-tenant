@@ -32,6 +32,7 @@ export interface TenantData {
 export interface TenantSummary {
   id: string;
   slug: string;
+  href: string;
   name: string;
   image_url: string;
   rattings: string;

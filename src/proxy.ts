@@ -41,4 +41,4 @@ export function proxy(req: NextRequest) {
   return NextResponse.rewrite(url);
 }
 
-//https://1.www.systemprog.online/
+//https://1.systemprog.online/
