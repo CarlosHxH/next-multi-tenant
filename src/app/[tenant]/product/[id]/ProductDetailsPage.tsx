@@ -8,6 +8,7 @@ import { useFetch } from "@/hooks/useFetch";
 import { useCart } from "@/hooks/useCart";
 import CartDrawer from "@/components/CartDrawer";
 import { ProductDetailsResponse, Product } from "@/types/tenant";
+import { ShoppingCart, ArrowLeft, AlertCircle } from "lucide-react";
 
 interface ProductDetailsPageProps {
   tenant: string;
@@ -39,9 +40,9 @@ export default function ProductDetailsPage({ tenant, id }: ProductDetailsPagePro
   if (error || !tenantData) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-center px-4">
-        <span className="text-5xl mb-4">🔍</span>
+        <AlertCircle size={64} className="text-gray-300 mb-4" />
         <h1 className="text-2xl font-bold text-gray-900">Restaurante não encontrado</h1>
-        <Link href={`/${tenant}`} className="mt-4 px-5 py-2 bg-gray-900 text-white rounded-xl text-sm">
+        <Link href={`/${tenant}`} className="mt-4 px-5 py-2 bg-gray-900 text-white rounded-xl text-sm font-medium hover:bg-black transition-colors">
           Voltar ao início
         </Link>
       </div>
@@ -64,10 +65,10 @@ export default function ProductDetailsPage({ tenant, id }: ProductDetailsPagePro
   if (!product) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-center px-4">
-        <span className="text-5xl mb-4">🍔</span>
+        <AlertCircle size={64} className="text-gray-300 mb-4" />
         <h1 className="text-2xl font-bold text-gray-900">Produto não encontrado</h1>
         <p className="text-gray-500 mt-1">Este item não faz parte do cardápio atual.</p>
-        <Link href={`/${tenant}`} className="mt-4 px-5 py-2 bg-amber-500 text-gray-950 font-bold rounded-xl text-sm">
+        <Link href={`/${tenant}`} className="mt-4 px-5 py-2 bg-amber-500 text-gray-950 font-bold rounded-xl text-sm hover:bg-amber-600 transition-colors">
           Voltar ao Cardápio
         </Link>
       </div>
@@ -87,9 +88,10 @@ export default function ProductDetailsPage({ tenant, id }: ProductDetailsPagePro
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <Link
             href={`/${tenant}`}
-            className="flex items-center text-sm font-bold text-gray-700 hover:text-amber-600 transition-colors"
+            className="flex items-center text-sm font-bold text-gray-700 hover:text-amber-600 transition-colors gap-1"
           >
-            <span className="mr-1.5 text-base">←</span> Cardápio
+            <ArrowLeft size={18} />
+            Cardápio
           </Link>
           <span className="text-xs font-semibold uppercase tracking-wider text-gray-400 bg-gray-100 px-2.5 py-1 rounded-md max-w-[180px] truncate">
             {tenantData.name}
@@ -98,7 +100,7 @@ export default function ProductDetailsPage({ tenant, id }: ProductDetailsPagePro
             onClick={() => setIsCartOpen(true)}
             className="relative flex items-center justify-center w-10 h-10 text-gray-700 hover:text-amber-600 transition-colors"
           >
-            <span className="text-xl">🛒</span>
+            <ShoppingCart size={24} />
             {cartItemsCount > 0 && (
               <span className="absolute top-0 right-0 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
                 {cartItemsCount}
