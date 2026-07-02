@@ -3,14 +3,10 @@ import { use } from 'react';
 import ProductDetailsPage from './ProductDetailsPage';
 
 interface ProductDetailsPageProps {
-  params: {
-    tenant: string;
-    id: string;
-  };
+  params: Promise<{ tenant: string, id: string }>;
 }
 
 export default function ProductPage({ params }: ProductDetailsPageProps) {
-  const { tenant, id } = params;
-  // const {tenant} = use(params);
+  const {tenant, id} = use(params);
   return <ProductDetailsPage id={id} tenant={tenant}/>
 }
