@@ -63,12 +63,12 @@ export default function TenantHomePage({ tenant }: TenantProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-gray-50 via-transparent to-transparent" />
         
         {/* Botão de Voltar Flutuante */}
-        {/* <Link 
+        <Link 
           href="/" 
-          className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur hover:bg-white text-gray-800 p-2.5 rounded-full shadow-lg transition-transform hover:-translate-x-0.5"
+          className="absolute top-4 left-4 z-10 bg-white/20 backdrop-blur hover:bg-white text-gray-800 p-2.5 rounded-full shadow-lg transition-transform hover:-translate-x-0.5"
         >
           <span className="text-sm font-bold">← Voltar</span>
-        </Link> */}
+        </Link>
       </div>
 
       {/* Perfil/Detalhes do Restaurante */}
