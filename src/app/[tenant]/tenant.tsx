@@ -101,6 +101,15 @@ export default function TenantHomePage({ tenant }: TenantProps) {
         </div>
       </header>
 
+      <div className="max-w-4xl mx-auto px-4 mb-8 flex justify-end">
+        <Link
+          href={`/${tenant}/admin`}
+          className="inline-flex items-center rounded-2xl bg-amber-500 px-5 py-3 text-sm font-semibold text-gray-950 shadow-lg shadow-amber-500/20 transition hover:bg-amber-400"
+        >
+          Acessar Admin
+        </Link>
+      </div>
+
       {/* Lista do Cardápio / Categorias */}
       <section className="max-w-4xl mx-auto px-4 space-y-10">
         {data.categories.map((category) => (
