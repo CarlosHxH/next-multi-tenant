@@ -5,6 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useFetch } from "@/hooks/useFetch";
+import { useCart } from "@/hooks/useCart";
 import { ProductDetailsResponse, Product } from "@/types/tenant";
 
 interface ProductDetailsPageProps {
@@ -15,9 +16,7 @@ interface ProductDetailsPageProps {
 export default function ProductDetailsPage({ tenant, id }: ProductDetailsPageProps) {
   // Buscamos os dados do tenant para garantir o contexto e regras do restaurante
   const { data, loading, error } = useFetch<ProductDetailsResponse>(`/api/v1/tenants/${tenant}/products/${id}`);
-  
-  const tenantData = data?.tenant ?? null;
-  const apiProduct = data?.product ?? null;
+  const { addItem, getTotalItems } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [notes, setNotes] = useState("");
 
@@ -174,7 +173,17 @@ export default function ProductDetailsPage({ tenant, id }: ProductDetailsPagePro
           <button
             disabled={!product.available}
             onClick={() => {
-              alert(`Adicionado ao carrinho:\n- Item: ${product?.name}\n- Qtd: ${quantity}\n- Obs: ${notes || "Nenhuma"}`);
+              addItem({
+                product_id: id,
+                name: product.name,
+                price: product.price,
+                quantity,
+                image_url: product.image_url,
+                notes,
+              });
+              alert(`✓ Adicionado ao carrinho!\n- Item: ${product?.name}\n- Qtd: ${quantity}\n- Total: R$ ${totalPrice.toFixed(2)}`);
+              setQuantity(1);
+              setNotes("");
             }}
             className={`flex-1 h-12 rounded-xl font-bold text-sm shadow-md transition-all flex items-center justify-between px-6 ${product.available
                 ? "bg-amber-500 text-gray-950 hover:bg-amber-600 active:scale-[0.99]"
