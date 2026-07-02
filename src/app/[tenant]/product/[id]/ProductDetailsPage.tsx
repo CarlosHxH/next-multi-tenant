@@ -14,7 +14,7 @@ interface ProductDetailsPageProps {
 
 export default function ProductDetailsPage({ tenant, id }: ProductDetailsPageProps) {
   // Buscamos os dados do tenant para garantir o contexto e regras do restaurante
-  const { data: tenantData, loading, error } = useFetch<TenantData>(`/api/v1/tenants/${tenant}`);
+  const { data: tenantData, loading, error } = useFetch<TenantData>(`/api/v1/tenants/${tenant}/products/${id}`);
 
   const [quantity, setQuantity] = useState(1);
   const [notes, setNotes] = useState("");
@@ -34,7 +34,7 @@ export default function ProductDetailsPage({ tenant, id }: ProductDetailsPagePro
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-center px-4">
         <span className="text-5xl mb-4">🔍</span>
         <h1 className="text-2xl font-bold text-gray-900">Restaurante não encontrado</h1>
-        <Link href="/" className="mt-4 px-5 py-2 bg-gray-900 text-white rounded-xl text-sm">
+        <Link href={`/${tenant}`} className="mt-4 px-5 py-2 bg-gray-900 text-white rounded-xl text-sm">
           Voltar ao início
         </Link>
       </div>
