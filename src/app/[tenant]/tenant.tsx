@@ -42,7 +42,7 @@ export default function TenantHomePage({ tenant }: TenantProps) {
         <span className="text-5xl mb-4">🍽️</span>
         <h1 className="text-2xl font-bold text-gray-900 mb-1">Restaurante não encontrado</h1>
         <p className="text-gray-500 mb-6">O cardápio que você está tentando acessar não existe ou está indisponível.</p>
-        <Link href="/" className="px-5 py-2.5 bg-gray-900 text-white rounded-xl text-sm font-medium hover:bg-gray-800 transition-colors">
+        <Link href={`/${tenant}`} className="px-5 py-2.5 bg-gray-900 text-white rounded-xl text-sm font-medium hover:bg-gray-800 transition-colors">
           Voltar para o Início
         </Link>
       </div>
