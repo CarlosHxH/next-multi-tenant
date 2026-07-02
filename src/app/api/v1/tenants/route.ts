@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
   const tenants = tenantsData.map(item => ({
     id: item.tenant_id,
     slug: item.slug,
+    href: `/${item.slug}`,
     url: `${proto}://${item.slug}.${host}`,
     name: item.name,
     image_url: item.image_url,

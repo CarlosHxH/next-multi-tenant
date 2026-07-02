@@ -64,7 +64,7 @@ export default function Home() {
           {data.map((restaurant) => (
             <Link 
               key={restaurant.id} 
-              href={restaurant.href}
+              href={restaurant.href || "/"}
               className="group bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-amber-500/50 transition-all duration-300 flex flex-col shadow-lg shadow-black/40 hover:-translate-y-1"
             >
               {/* Container da Imagem */}
