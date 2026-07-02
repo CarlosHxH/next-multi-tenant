@@ -63,12 +63,12 @@ export default function TenantHomePage({ tenant }: TenantProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-gray-50 via-transparent to-transparent" />
         
         {/* Botão de Voltar Flutuante */}
-        <Link 
+        {/* <Link 
           href="/" 
           className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur hover:bg-white text-gray-800 p-2.5 rounded-full shadow-lg transition-transform hover:-translate-x-0.5"
         >
           <span className="text-sm font-bold">← Voltar</span>
-        </Link>
+        </Link> */}
       </div>
 
       {/* Perfil/Detalhes do Restaurante */}
@@ -114,11 +114,10 @@ export default function TenantHomePage({ tenant }: TenantProps) {
                 const isAvailable = product.available;
                 
                 return (
-                  <div
-                    key={product.product_id}
-                    className={`bg-white rounded-xl border border-gray-100 shadow-sm p-4 flex gap-4 hover:shadow-md transition-all group ${
-                      !isAvailable ? "opacity-60 bg-gray-50/50" : ""
-                    }`}
+                  <Link 
+                    key={product.product_id} 
+                    href={`/${tenant}/product/${product.product_id}`}
+                    className={`bg-white rounded-xl border border-gray-100 shadow-sm p-4 flex gap-4 hover:shadow-md transition-all group ${!isAvailable ? "opacity-60 bg-gray-50/50" : ""}`}
                   >
                     {/* Detalhes de Texto */}
                     <div className="flex flex-col justify-between flex-1 min-w-0">
@@ -163,7 +162,7 @@ export default function TenantHomePage({ tenant }: TenantProps) {
                         />
                       </div>
                     )}
-                  </div>
+                  </Link>
                 );
               })}
             </div>
