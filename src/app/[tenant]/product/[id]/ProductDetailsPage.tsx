@@ -5,7 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useFetch } from "@/hooks/useFetch";
-import { TenantData, Product } from "@/types/tenant";
+import { ProductDetailsResponse, Product } from "@/types/tenant";
 
 interface ProductDetailsPageProps {
   tenant: string;
@@ -14,8 +14,10 @@ interface ProductDetailsPageProps {
 
 export default function ProductDetailsPage({ tenant, id }: ProductDetailsPageProps) {
   // Buscamos os dados do tenant para garantir o contexto e regras do restaurante
-  const { data: tenantData, loading, error } = useFetch<TenantData>(`/api/v1/tenants/${tenant}/products/${id}`);
-
+  const { data, loading, error } = useFetch<ProductDetailsResponse>(`/api/v1/tenants/${tenant}/products/${id}`);
+  
+  const tenantData = data?.tenant ?? null;
+  const apiProduct = data?.product ?? null;
   const [quantity, setQuantity] = useState(1);
   const [notes, setNotes] = useState("");
 
@@ -42,12 +44,14 @@ export default function ProductDetailsPage({ tenant, id }: ProductDetailsPagePro
   }
 
   // Encontra o produto específico dentro das categorias do Tenant carregado
-  let product: Product | undefined;
-  for (const category of tenantData.categories) {
-    const found = category.products.find((p) => p.product_id === id);
-    if (found) {
-      product = found;
-      break;
+  let product: Product | undefined = apiProduct ?? undefined;
+  if (!product && tenantData) {
+    for (const category of tenantData.categories) {
+      const found = category.products.find((p) => p.product_id === id);
+      if (found) {
+        product = found;
+        break;
+      }
     }
   }
 

@@ -35,3 +35,8 @@ export interface TenantSummary {
   image_url: string;
   rattings: string;
 }
+
+export interface ProductDetailsResponse {
+  tenant: TenantData;
+  product: Product;
+}
