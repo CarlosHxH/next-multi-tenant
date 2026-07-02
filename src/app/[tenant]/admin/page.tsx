@@ -126,7 +126,7 @@ export default function TenantAdminPage() {
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
-      <div className="relative">
+      <div className="relative min-h-screen">
         <aside className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-10 lg:w-80 lg:border-r lg:border-white/10 lg:bg-slate-950/95 lg:flex lg:flex-col lg:h-screen lg:overflow-y-auto">
           {sidebarContent}
         </aside>
