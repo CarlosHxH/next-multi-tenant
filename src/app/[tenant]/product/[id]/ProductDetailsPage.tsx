@@ -23,6 +23,9 @@ export default function ProductDetailsPage({ tenant, id }: ProductDetailsPagePro
   const [isCartOpen, setIsCartOpen] = useState(false);
   const cartItemsCount = getTotalItems();
 
+  const tenantData = data?.tenant ?? null;
+  const apiProduct = data?.product ?? null;
+
   // Estados de carregamento e erro da API
   if (loading) {
     return (
