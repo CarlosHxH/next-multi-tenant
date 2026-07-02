@@ -127,7 +127,7 @@ export default function TenantAdminPage() {
   return (
     <main className="min-h-screen bg-slate-950 text-white">
       <div className="relative flex min-h-screen overflow-hidden">
-        <aside className="hidden w-80 shrink-0 border-r border-white/10 bg-slate-950/95 lg:flex lg:flex-col">
+        <aside className="hidden w-80 shrink-0 border-r border-white/10 bg-slate-950/95 lg:flex lg:flex-col lg:min-h-screen">
           {sidebarContent}
         </aside>
 
@@ -160,7 +160,7 @@ export default function TenantAdminPage() {
               </div>
             </section>
 
-            <section id="stats" className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <section id="stats" className="mt-8 grid gap-4 grid-cols-2 sm:grid-cols-4">
               <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
                 <p className="text-sm uppercase tracking-[0.3em] text-gray-400">Total de produtos</p>
                 <p className="mt-4 text-4xl font-bold text-white">{productCount}</p>
@@ -175,6 +175,10 @@ export default function TenantAdminPage() {
               </div>
               <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
                 <p className="text-sm uppercase tracking-[0.3em] text-gray-400">Taxa de entrega</p>
+                <p className="mt-4 text-4xl font-bold text-white">R$ {data.delivery_rules.fixed_fee.toFixed(2)}</p>
+              </div>
+              <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+                <p className="text-sm uppercase tracking-[0.3em] text-gray-400">Total de pedidos</p>
                 <p className="mt-4 text-4xl font-bold text-white">R$ {data.delivery_rules.fixed_fee.toFixed(2)}</p>
               </div>
             </section>
